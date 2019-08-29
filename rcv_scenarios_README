@@ -1,0 +1,97 @@
+DESCRIPTION:
+
+rcv_scenarios.py runs rank-choice voting on a sweep of predefined scenarios.
+
+The election winners are determined by Single Transferrable Voting:
+votes that exceed the required threshold are transfered proportionally to 
+their remaining share among votes with same first choice.
+
+The scenarios (described below) represent a range of potential voter behavior in
+communities with one or two sizeable racial minority populations.
+The scenarios vary:
+    - number of seats in the election
+    - level of racial polarization
+    - aggreement on how candidates are ranked
+
+
+
+USER GUIDE:
+
+The most basic (and intended) use of this simulation requires only changing the 
+following input (located at the very bottom of the rcv_scenarios.py script):
+
+    - cvap_vec = [percent white CVAP, 
+                    percent minority1 CVAP, 
+                    percent minority2 CVAP, 
+                    percent other CVAP]
+        (e.g. cvap_vec = [.60, .3, .15, .05])
+    - crossover_vec = [percent white crossover, 
+                        percent minority1 crossover, 
+                        percent minority2 crossover, 
+                        percent other crossover]
+        (e.g. cvap_vec = [.60, .3, .15, .05])
+    - num_votes = number of total votes cast in each simulation run
+        (e.g. num_votes = 3000)
+    - num_runs = number of times each election is simulated (note that
+        to avoid redundancy, each deterministic scenario is only run once)
+        (e.g. num_runs = 100)
+
+A user may also generate new scenarios to add to the sweep (or contact us with
+ideas for new scenarios).
+
+It is not intended for the user to change any of the code that actually simulates
+the election
+
+
+
+SCENARIOS:
+
+There are eight different scenarios in the simulation.  Each scenario is run for 
+four different number of representative seats (3,5,7, and 9) for a total of 32 
+different simulations.  The scenarios vary over two different levels of voting 
+polarization and four different ways of ordering ('permuting') the candidates, 
+giving a total of eight possible combinations.
+
+
+Voting Polarization:
+	- In 'Polarized' voting, voters prefer candidates of their racial group to 
+	candidates of other racial groups.  That is, white voters prefer white candidates 
+	to minority candidates and rank all white candidates before ranking any minority 
+	candidates. Conversely, minority voter rank all minority candidates before 
+	ranking any white candidates.
+	- In 'Crossover' voting, some percent of voters from a given racial group (user-
+	specified input values) will prefer a candidate of a different racial group, and
+	the remaining voters vote 'Polarized', as above.  We use a simple model of 
+	crossover voting in which a white 'Crossover' voter ranks a minority candidate 
+	first and then alternates (i.e. ABABAB...) between white and minority candidates.
+	Conversely, a minority 'Crossover' voter ranks a white candidate first and then
+	alternates between minority and white candidates.
+
+Candidate Permutations:
+	- In 'Unanimous' voting, all voters agree on the same ranking of white candidates
+	and the same ranking of minority candidates.  (How those candidates from 
+	different racial groups are ranked compared to each other is determined by
+	the voting polarization level described above).
+	- In 'Non-white voters permute minority candidates' voting,  minority voters 
+	don't agree on the ranking of minority candidates (the simulation chooses each minority
+	voter's ranking of minority candidates at random)
+	- In 'white voters permute all candidates' voting, white voters don't agree on the the
+	ranking of white candidates OR on the ranking of minority candidates
+	- In 'white and minority voters permute all candidates' voting, there is not agreement
+	on the ranking of white or minority candidates among voters of any racial group. 
+
+
+
+SIMPLIFYING ASSUMPTIONS:
+
+There are arbitrarily many options and scenarios that can be simulated.  In order to 
+simulate a reasonable number of representative scenarios we make some simplifying 
+assumptions.
+	- We assume that if there are n seats, then there are n white candidates and
+	n minority candidates in the race.  This assumption allows for all possible
+	numbers of minority (and white) winners between 0 and n.
+	- We assume that every voter ranks every candidate.
+	- We assume that a minority 'crossover' voter is one who prefers a white candidate
+	rather than a minority candidate from a different racial group than their own.
+
+
