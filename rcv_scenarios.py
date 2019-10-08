@@ -187,15 +187,15 @@ def run_scenarios(cvap_vec, crossover_vec, num_votes, num_runs):
 			[0,0,0,0], 'total pol., unam vote']
 
 	scen2a = [[False, False, False, False],
-			[True, False, True, True],
+			[False, True, True, True],
 			[0,0,0,0], 'total pol., minority permute min_i']
 
 	scen2b = [[True, True, True, True],
 			[True, True, True, True],
 			[0,0,0,0], 'total pol., all permute all']
 
-	scen2c = [[False, True, False, False],
-			[False, True, False, False],
+	scen2c = [[True, False, False, False],
+			[True, False, False, False],
 			[0,0,0,0], 'total pol., white permute all']
 
 	scen3 = [[False, False, False, False],
@@ -203,15 +203,15 @@ def run_scenarios(cvap_vec, crossover_vec, num_votes, num_runs):
 			crossover_vec, 'crossover, unam vote']
 
 	scen4a = [[False, False, False, False],
-			[True, False, True, True],
-			crossover_vec, 'crossover, non-minority permute min_i']
+			[False, True, True, True],
+			crossover_vec, 'crossover, minority permute min_i']
 
 	scen4b = [[True, True, True, True],
 			[True, True, True, True],
 			crossover_vec, 'crossover, all permute all']
 
-	scen4c = [[False, True, False, False],
-			[False, True, False, False],
+	scen4c = [[True, False, False, False],
+			[True, False, False, False],
 			crossover_vec, 'crossover, white permute all']
 
 	scen_list = [scen1, scen2a, scen2b, scen2c, scen3, scen4a, scen4b, scen4c]
